@@ -1,29 +1,44 @@
 import React from 'react';
 import './App.css';
 
-const Welcome = (props) => {
-  return (
-    <div>
-      {
-        props.isTeacher && 
-        <h2>Hello, {props.name}, I am a Teacher</h2>
-      }
-      {
-        !props.isTeacher &&
-        <p>{`Hello ${props.name}, I am a student`}</p>
-      }
-    </div>
-  );
-} 
+class App extends React.Component{
+  constructor(){
+    super()
+    this.state = {
+      count : 0
+    }
+  }
 
-const App= () => {
-  return (
-    <section className="App">
-        <Welcome name={'Nick'} isTeacher />
-        <Welcome name="Tim" />
-        <Welcome name="Sam" />
-    </section>
-  );
+  handleAdd(){
+    this.setState(
+      {
+        count: this.state.count + 1
+      }
+    )
+  }
+
+  handleSubtract() {
+    // Wrong: setState is async
+    // this.setState({count: this.state.count - 1 });
+    this.setState(
+      {
+        count: this.state.count - 1
+      }
+    )
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <h1>Hello, World!</h1>
+        <h1>Hello,nick, I am a Teacher</h1>
+        <h2>Hello, Songtao, I am a student</h2>
+        <span>count is : {this.state.count} {this.state.multiple}</span>
+        <button onClick={this.handleSubtract.bind(this)}>-</button>
+        <button onClick={this.handleAdd.bind(this)}>+</button>
+      </div>
+    )
+  }
 }
-
 export default App;
+
